@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Relativity</title>
+    <link href="https://fonts.googleapis.com/css?family=Aldrich" rel="stylesheet"> <!-- Google fonts -->
+    <link rel="stylesheet" href="simulator.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+    <script src="simulator.js"></script>
+
+</head>
+
+<body onload="init()" >
+    <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #f0f0f0">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Special Relativity Simulations
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="simulator.html">Time Dilation & Length Contraction</a>
+                        <a class="dropdown-item" href="relativity.html">Relativity Of Simultaneity</a>
+
+                    </div>
+                </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link" href="blackhole.html">Blackhole Simulation</a>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+
+    <h2 class="title">Time Dilation & Length Contraction</h2>
+    <div class="container ">
+        <div class="row justify-content-center">
+            <div class="row ">
+                <div class="col">
+                    <div class="card" style="width: 25rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Instructions</h5>
+                            <div>
+                                <ul>
+                                    <li>
+                                        Choose a frame of reference. For example if you choose Einstein's,
+                                        his velocity will be zero, since he can't be moving relative to himself.
+                                    </li>
+                                    <li>
+                                        Enter the other spaceship's speed
+                                    </li>
+                                    <li>
+                                        Set spaceships' initial lengths
+                                    </li>
+                                    <li>
+                                        Click simulate and observe how time dilates and length of ship contracts!
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 25rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Choosing a Frame</h5>
+                            <!-- Input panel -->
+                            <div class="inlinebox">
+                                <input type="radio" name="frame" id="einsteinRB" onchange="changeFrame(this)"
+                                    checked="checked"><span
+                                    style="color:rgb(255, 187, 0); font-weight: bold;">Einstein</span>
+                                <input type="radio" name="frame" id="micheleRB" onchange="changeFrame(this)"><span
+                                    style="color:#4080bf ; font-weight: bold;">Michele</span>
+                                <br> <br />
+                                <h4 id="speed_text" style="font-size: 18px;">Set velocities relative to Einstein (in
+                                    terms of speed of light (c))
+                                </h4>
+                                <span style="color:rgb(255, 187, 0)">Einstein</span>: <input type="number"
+                                    id="einstein_speed" min="-0.99" max="0.99" step="0.01" value="0"
+                                    disabled="disabled">
+                                <span style="color:#4080bf">Michele</span>: <input type="number" id="michele_speed"
+                                    min="-0.99" max="0.99" step="0.01" value="0">
+
+                                <h4 style="font-size: 18px;">Set their spaceships' <i>proper</i> lengths (in meters)
+                                </h4>
+
+                                <span style=" color:rgb(255, 187, 0)">Einstein</span>: <input type="number"
+                                    id="einstein_len" min="1" max="1000" step="1" value="100">
+                                <span style="color:#4080bf">Michele</span>: <input type="number" id="michele_len"
+                                    min="1" max="1000" step="1" value="100">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="shipdiv1">
+        <canvas id="shipcanvas" width="1000" height="500">
+            If you're seeing this, your browser does not support the canvas element
+        </canvas>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="row">
+
+                <div class="col">
+                    <div class="card" style="width: 25rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Simulate</h5>
+                            <!-- Controls panel -->
+                            <div>
+                                <button style="display: block" class="btn btn-outline-dark" id="playpause"
+                                    onclick="togglePlay(this)">Start</button>
+                                <h6></h6>
+                                <button id="reset" class="btn btn-outline-dark" onclick="reset()"
+                                    disabled="disabled">Reset</button>
+                                <h6></h6>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card" style="width: 25rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Clocks on spaceships(nanoseconds)</h5>
+
+                            <h6 style="display: inline">Rear &emsp; &emsp; &nbsp;</h6>
+                            <h6 style="display: inline">Middle &emsp;&emsp;&nbsp; &nbsp;</h6>
+                            <h6 style="display: inline">Front </h6>
+                            <div class="inlinebox">
+
+                                <input class="clke" type="number" id="einstein_rear" min="1" max="1000" step="1"
+                                    value="0" readonly>
+                                <input class="clke" type="number" id="einstein_middle" min="1" max="1000" step="1"
+                                    value="0" readonly>
+                                <input class="clke" type="number" id="einstein_front" min="1" max="1000" step="1"
+                                    value="0" readonly>
+                                <h6></h6>
+                                <input class="clkm" type="number" id="michele_rear" min="1" max="1000" step="1"
+                                    value="0" readonly>
+                                <input class="clkm" type="number" id="michele_middle" min="1" max="1000" step="1"
+                                    value="0" readonly>
+                                <input class="clkm" type="number" id="michele_front" min="1" max="1000" step="1"
+                                    value="0" readonly>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

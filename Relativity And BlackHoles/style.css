@@ -1,0 +1,49 @@
+html, body {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    padding: 0px;
+    cursor: none;
+    margin: 0px;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    background-color: #000;
+  }
+  
+  canvas {
+    margin: auto auto;
+  }
+
+  #container {
+    position: relative;
+  }
+  #container canvas, #overlay {
+    position: absolute;
+  }
+  canvas {
+    border: 1px solid black;
+  }
+
+
+
+
+  
+  #bhsimul{
+    width: 1000px;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+  }
+
+
+  .text2{
+    margin-left: 180px;
+    margin-right: 180px;
+    margin-bottom: 20px;
+    
+  
+  }

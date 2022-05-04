@@ -1,0 +1,88 @@
+/* body{
+    padding: 2rem 0rem;
+  } */
+
+
+
+  body{
+	font-family: 'Aldrich', sans-serif; /* From Google fonts */
+}
+
+
+/* input[type="number"]:disabled{
+	background: #909090;
+} */
+  
+.title{
+	text-align: center;
+	margin: 20px;
+}
+#shipdiv{
+	width: 1000px;
+	height: 300px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 20px;
+    margin-top: 20px;
+    background-image:  url("space.png");
+}
+
+#bhdiv{
+	width: 1000px;
+	height: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+#shipdiv1{
+	width: 1000px;
+	height: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 20px;
+    margin-top: 20px;
+    background-image:  url("space.png");
+}
+
+.text{
+	margin-left: 180px;
+	margin-right: 180px;
+	margin-bottom: 20px;
+    margin-top: 20px;
+	
+
+}
+#shipsimul{
+	width: 1000px;
+	height: 300px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 20px;
+    margin-top: 20px;
+    background-image:  url("space.png");
+}
+
+
+
+#clkdiv{
+	width: 400px;
+	height: 200px;
+	
+}
+.inlinebox{
+	display: inline-block;
+	
+	vertical-align: top;
+}
+
+.clke{
+    border-radius: 5px;
+    border-color: orange;
+}
+
+.clkm{
+    border-radius: 5px;
+    border-color: blue;
+}

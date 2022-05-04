@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Black Hole</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+	<link rel="stylesheet" href="./style.css">
+
+
+
+	<script id="2d-fragment-shader" type="x-shader/x-fragment">
+
+
+#ifdef GL_ES
+precision mediump float;
+#endif
+
+#define PI 3.14159265359
+
+uniform sampler2D u_image;
+varying vec2 v_texCoord;
+
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+uniform float u_mass;
+uniform float u_time;
+uniform float u_clickedTime;
+
+vec2 rotate(vec2 mt, vec2 st, float angle){
+	float cos = cos((angle + u_clickedTime) * PI); // try replacing * 1.0 with * PI
+	float sin = sin(angle * 0.0); // try removing the * 0.0
+
+	
+	float nx = (cos * (st.x - mt.x)) + (sin * (st.y - mt.y)) + mt.x;
+	float ny = (cos * (st.y - mt.y)) - (sin * (st.x - mt.x)) + mt.y;
+	return vec2(nx, ny);
+}
+
+void main() {
+    vec2 st = vec2(gl_FragCoord.x, u_resolution.y - gl_FragCoord.y)/u_resolution;
+	vec2 mt = vec2(u_mouse.x, u_resolution.y - u_mouse.y)/u_resolution;
+
+	float dx = st.x - mt.x;
+	float dy = st.y - mt.y;
+
+	float dist = sqrt(dx * dx + dy * dy);
+	float pull = u_mass / (dist * dist);
+	
+     vec3 color = vec3(0.0);
+	
+	vec2 r = rotate(mt,st,pull);
+	vec4 imgcolor = texture2D(u_image, r);
+	color = vec3(
+		(imgcolor.x - (pull * 0.25)),
+		(imgcolor.y - (pull * 0.25)), 
+		(imgcolor.z - (pull * 0.25))
+	);
+	
+
+     gl_FragColor = vec4(color,1.);
+}
+</script>
+	<script id="2d-vertex-shader" type="x-shader/x-vertex">// <![CDATA[
+	attribute vec2 a_position;
+	attribute vec2 a_texCoord;
+	
+	varying vec2 v_texCoord;
+	void main() {
+		gl_Position = vec4(a_position, 0, 1);
+		v_texCoord = a_texCoord;
+	}
+	</script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+		crossorigin="anonymous"></script>
+	<link href="https://fonts.googleapis.com/css?family=Aldrich" rel="stylesheet"> <!-- Google fonts -->
+
+	<script src="./script.js" defer></script>
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-light " style="background-color: #f0f0f0">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+
+
+				<li class="nav-item dropdown active">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Special Relativity Simulations
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="simulator.html">Time Dilation & Length Contraction</a>
+						<a class="dropdown-item" href="relativity.html">Relativity Of Simultaneity</a>
+
+					</div>
+				</li>
+
+				<li class="nav-item ">
+					<a class="nav-link" href="blackhole.html">Blackhole <span class="sr-only">(current)</span></a>
+				</li>
+
+			</ul>
+
+		</div>
+	</nav>
+	<div class="text2" style="text-align: center;">
+		<h5>Blackhole</h5>
+		This simulation serves as a small scale model of a blackhole and how it warps the space and time dimension around it. The blackhole is only a function of its mass and can not be predicted or measured in terms of its behavior. As the mass grows the size of the blackhole also increases which may cause an increment in its magnetic strength and field. 
+Clicking through the blackhole you can see how deep it goes and how the space within a blackhole is just as warped and distorted as that outside it. The blackhole consists of nothing but energy and this energy allows it to consume everything that comes in its path, even light. You can see how the blob of darkness moves around and consumes all light around it. 
+
+	</div>
+	<div id=bhsimul>
+		<canvas id="glscreen" width="1000" height="300" style="display: block;">
+			If you're seeing this, your browser does not support the canvas element
+		</canvas>
+	</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Relativity</title>
+    <link href="https://fonts.googleapis.com/css?family=Aldrich" rel="stylesheet"> <!-- Google fonts -->
+    <link rel="stylesheet" href="simulator.css">
+    <script src="relativity.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+
+<body onload="init()">
+
+    <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #f0f0f0">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Special Relativity Simulations
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="simulator.html">Time Dilation & Length Contraction</a>
+                        <a class="dropdown-item" href="relativity.html">Relativity Of Simultaneity</a>
+
+                    </div>
+                </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link" href="blackhole.html">Blackhole <span class="sr-only">(current)</span></a>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+
+
+
+
+    <h2 class="title">Relativity Of Simultaneity</h2>
+
+
+    <div class="container ">
+        <div class="row justify-content-center">
+            <div class="row ">
+                <div class="col">
+                    <div class="card" style="width: 50rem;">
+                        <div class="card-body">
+                            <!-- <h5 class="card-title">Relativity of Simultaneity</h5> -->
+                            <div>
+                                <ul>
+                                    <li>
+                                        <span style="color:rgb(255, 187, 0)">Einstein</span> and <span
+                                            style="color:rgb(0, 0, 200)">Michele</span> are sitting in
+                                        the middle of train and platform respectively. When simulate is clicked, both
+                                        pass
+                                        eachother and lightning strikes on
+                                        both ends of train.
+                                    </li>
+                                    <li>
+                                        Velocity of objects in motion = 0.3c
+                                    </li>
+                                    <li>
+                                        Click simulate to see from <span style="color:rgb(255, 187, 0)">Einstein</span>
+                                        and <span style="color:rgb(0, 0, 200)">Michele</span>'s perspective
+                                    </li>
+                                    <li>
+                                        Conclusion: Events that are simultaneous for one observer are not simultaneous
+                                        to
+                                        another observer who is at contsant motion relative to the first.
+                                    </li>
+                                    <li>
+                                        Based on this and the postulate that the speed of light is constant in either
+                                        direction, purple
+                                        lightning indeed occurred before the red.
+                                    </li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="text">
+        <h5>Einstein - Train's Perspective</h5>
+        <p>A train of length rushes past a platform at a speed of v = 0.3c. Lightning strikes on the front and rear of
+            the train
+            , as Einstein and Michele
+            cross each other when we click simulate. Einstein, who is seated right in the middle of the train, sees
+            both
+            flashes
+            simultaneously. </p>
+    </div>
+    <div id="shipsimul">
+        <canvas id="shipcanvas" width="1000" height="300">
+            If you're seeing this, your browser does not support the canvas element
+        </canvas>
+    </div>
+
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="row">
+                <div class="col">
+                    <div class="card" style="width: 25rem;">
+                        <div class="card-body">
+                            <p style="color: orange;"> Einstein Perspective: Time interval t = 0 ticks </p>
+                            <p style="color: rgb(0, 0,200); display: inline;"> Michele Perspective: Time interval
+                                t' = </p>
+                            <p style=" display: inline; color: rgb(0, 0, 200);" id="time"> </p>
+                            <p style=" display: inline; color: rgb(0, 0, 200);"> ticks </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 25rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Simulate</h5>
+                            <!-- Controls panel -->
+                            <div>
+                                <button style="display: block" class="btn btn-outline-dark" id="playpause"
+                                    onclick="togglePlay(this)">Start</button>
+                                <h6></h6>
+                                <button id="reset" class="btn btn-outline-dark" onclick="reset()"
+                                    disabled="disabled">Reset</button>
+                                <h6></h6>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="text">
+        <h5>Michele - Platform's Perspective</h5>
+        <p>Now we view from Michele's perspective on the platform. According to Michele, the lightning does not flash
+            simultaneously. In fact, the purple lightning must strike before the red lightning. If it didn't, Einstein
+            wouldn't have been able to see the light flashes reaching him simultaneously.</p>
+    </div>
+
+    <div id="shipsimul">
+        <canvas id="shipcanvas2" width="1000" height="300">
+            If you're seeing this, your browser does not support the canvas element
+        </canvas>
+    </div>
+
+<div style="text-align: center;">
+    Group Members: Hafsa Irfan, Batool Ahmed, Marium Rehman, Zainab
+</div>
+
+
+</body>
+
+</html>
